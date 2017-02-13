@@ -10,6 +10,8 @@ import Ventana2_Juego.Juego;
 
 
 public class Principal extends JFrame {
+	public Principal() {
+	}
 
 	//Serial Version//
 	private static final long serialVersionUID = 1L;

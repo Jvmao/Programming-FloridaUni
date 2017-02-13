@@ -6,8 +6,7 @@ public class Jugador {
 			private String apellido1;
 			private String apellido2;
 			private int edad;
-			//Agregada nueva Variable llamada Género//
-			private String genero;
+			private String genero;//Agregada nueva Variable llamada Género//
 			private int id;
 			private int puntos;
 	
@@ -50,7 +49,6 @@ public class Jugador {
 		public String getGenero() {
 			return genero;
 		}
-		//String para Género//
 		public void setGenero(String genero) {
 			this.genero = genero;
 		}
@@ -94,4 +92,5 @@ public class Jugador {
 				public String toString(){
 					return this.nombre+ " " +this.apellido1+ " " +this.apellido2+ " " +this.edad+ " años" +this.genero+ " "+this.id+ " " +this.puntos;
 				}
+				
 }
