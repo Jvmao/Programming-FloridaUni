@@ -43,6 +43,7 @@ public class Calculadora extends JFrame {
 		contentPane.setBackground(new Color(255, 102, 51));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setResizable(false);
 		contentPane.setLayout(null);
 		
 		//Campo donde se recogerán las Operaciones//
