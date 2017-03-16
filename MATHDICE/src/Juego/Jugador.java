@@ -1,4 +1,4 @@
-package Ventana1_Login;
+package Juego;
 
 public class Jugador {
 	//Variables// 
@@ -8,7 +8,7 @@ public class Jugador {
 			private int edad;
 			private String genero;//Agregada nueva Variable llamada Género//
 			private int id;
-			private int puntos;
+			private int puntos = 0;
 	
 		public Jugador() {
 		
@@ -90,7 +90,8 @@ public class Jugador {
 				}
 				
 				public String toString(){
-					return this.nombre+ " " +this.apellido1+ " " +this.apellido2+ " " +this.edad+ " años" +this.genero+ " "+this.id+ " " +this.puntos;
+					return this.nombre+ " " +this.apellido1+ " " +this.apellido2+ " " +this.edad+ " años " 
+							+this.genero+ " "+this.id+ " "+this.puntos+ " puntos ";
 				}
 				
 }

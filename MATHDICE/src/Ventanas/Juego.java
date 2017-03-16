@@ -1,44 +1,52 @@
-package Ventana2_Juego;
+package Ventanas;
 
 import java.awt.Color;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import Ventana1_Login.Jugador;
-import Ventana1_Login.Login;
-
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Random;
-import java.awt.Font;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.event.MouseAdapter;
-import java.awt.Toolkit;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import Juego.Jugador;
 
 //Abrir la nueva clase con la opción JFrame//
-public class Juego extends JFrame {
+public class Juego extends JPanel {
+	//Variable Panel//
 	private JPanel contentPane;
 	
 	//Variables para los Botones//
-	private JButton salir , reiniciar , sumar , restar , mathDice, btLogin;
-	private Jugador p1;
+	private JButton salir , reiniciar , sumar , restar , mathDice;
+	
 	
 	//Clase para almacenar el Jugador//
-	private Jugador player1;
+	private Jugador p1;
+	
+	//Ventana Perfil//
+	private Perfil v4;
+	
 	//Variables para los JLabel//
 	private JLabel Nombre_p1 , Dado1 , Dado2 , Dado3 , Dado4 , Dado5 , Dado6;
 	private JLabel imagenEstatica1 , imagenEstatica2;
 	private JLabel resultadoOperacion , resultadoCorrecto;
+	private JLabel puntuacion;
 	private JTextField operaciones; 
+	
+	//Variables Menú//
+	private JMenuBar menuBar;
+	private JMenu mnLista;
+	private JMenuItem mntmUsuario;
 	
 	//Declaramos el Objeto Random//
 	private Random dado = new Random();
@@ -77,39 +85,44 @@ public class Juego extends JFrame {
 	
 	//--------------------Frame de la ventana JUEGO---------------------//
 	public Juego() {
-		setTitle("MATHDICE");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 880, 524);
-		contentPane = new JPanel();
+		//setTitle("MATHDICE");
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 880, 530);
+		contentPane = this;
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		//setContentPane(contentPane);
 		contentPane.setLayout(null);
 		//Cambiar Color ContenPane//
 		contentPane.setBackground(Color.ORANGE);
+		setLayout(null);
+		
 		//Con el comando setLocationRelativeTo centramos la ventana del Juego en el CENTRO de la Pantalla//
-		setLocationRelativeTo(null);
+		//setLocationRelativeTo(null);
 		//Impedimos que la Ventana se puedad hacer más grande//
-		setResizable(false);
+		//setResizable(false);
+		
+		
 	//------------------------------------------------------------------//
 		
 		
 		//-------Nombre de la Ventana LOGIN pasa a la Ventana JUEGO------//
 		Nombre_p1 = new JLabel(" " +p1);
-		Nombre_p1.setFont(new Font("Trajan Pro", Font.BOLD, 14));
+		Nombre_p1.setVerticalAlignment(SwingConstants.TOP);
 		Nombre_p1.setBounds(0, 0, 400, 20);
+		Nombre_p1.setFont(new Font("Trajan Pro", Font.BOLD, 14));
 		contentPane.add(Nombre_p1);
 		//----------------------------------------------------------------------//
 			
 		
 		//--------------DADO 1-----------------------------------------//
 		Dado1 = new JLabel(" ");
+		Dado1.setBounds(20, 31, 148, 134);
 		/**(Parte No Necesaria pero útil para otros proyectos)
 		Dado1.addMouseListener(new innerDado());
 		Dado1.setIcon(dados3[numerosAlmacenadosDados3[0]]);
 		Dado1.setIcon(dados3[dado.nextInt(3)]);//Otra manera de cargar la imágen desde Array//
 		Dado1.setName("1");**/
 		Dado1.setHorizontalAlignment(SwingConstants.CENTER);
-		Dado1.setBounds(20, 31, 148, 134);
 		contentPane.add(Dado1);
 		//---------------------------------------------------------------//
 		
@@ -117,8 +130,8 @@ public class Juego extends JFrame {
 		
 		//----------------DADO 2-----------------------------------------//
 		Dado2 = new JLabel(" ");
-		Dado2.setHorizontalAlignment(SwingConstants.CENTER);
 		Dado2.setBounds(179, 31, 148, 134);
+		Dado2.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(Dado2);
 		//-----------------------------------------------------------//
 		
@@ -126,8 +139,8 @@ public class Juego extends JFrame {
 		
 		//-------------------------DADO 3------------------------------//
 		Dado3 = new JLabel(" ");
-		Dado3.setHorizontalAlignment(SwingConstants.CENTER);
 		Dado3.setBounds(337, 31, 148, 134);
+		Dado3.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(Dado3);
 		//-------------------------------------------------------------//
 		
@@ -135,8 +148,8 @@ public class Juego extends JFrame {
 		
 		//---------------------------DADO 4-------------------------------------//
 		Dado4 = new JLabel(" ");
-		Dado4.setHorizontalAlignment(SwingConstants.CENTER);
 		Dado4.setBounds(82, 174, 148, 134);
+		Dado4.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(Dado4);
 		//----------------------------------------------------------------------//
 		
@@ -144,8 +157,8 @@ public class Juego extends JFrame {
 		
 		//---------------------------DADO 5-------------------------------------//
 		Dado5 = new JLabel();
-		Dado5.setHorizontalAlignment(SwingConstants.CENTER);
 		Dado5.setBounds(273, 174, 148, 134);
+		Dado5.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(Dado5);
 		//----------------------------------------------------------------------//
 		
@@ -160,25 +173,26 @@ public class Juego extends JFrame {
 		
 		//-----------------Imagen Estática 1--------------------------------------------------//
 		imagenEstatica1 = new JLabel("");
+		imagenEstatica1.setBounds(666, 31, 89, 97);
 		imagenEstatica1.setHorizontalAlignment(SwingConstants.CENTER);
 		//Cargamos la imagen desde la carpeta de imagenes//
 		imagenEstatica1.setIcon(new ImageIcon(Juego.class.getResource("/imagenes/IronMan.png")));
-		imagenEstatica1.setBounds(666, 31, 89, 115);
 		contentPane.add(imagenEstatica1);
 		//------------------------------------------------------------------------------------//
 		
 		//-----------------Imagen Estática 2--------------------------------------------------//
 		imagenEstatica2 = new JLabel("");
+		imagenEstatica2.setBounds(765, 31, 89, 97);
 		//Cargamos la imagen desde la carpeta de imagenes//
-		imagenEstatica2.setIcon(new ImageIcon(Juego.class.getResource("/imagenes/punisher.png")));
+		imagenEstatica2.setIcon(new ImageIcon(Juego.class.getResource("/imagenes/SpiderMan.png")));
 		imagenEstatica2.setHorizontalAlignment(SwingConstants.CENTER);
-		imagenEstatica2.setBounds(765, 31, 89, 110);
 		contentPane.add(imagenEstatica2);
 		//-----------------------------------------------------------------------------------//
 		
 		
 		//--------------------------------Boton SUMAR------------------------------//
 		sumar = new JButton(" + ");
+		sumar.setBounds(666, 133, 89, 53);
 		sumar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Pasa el Signo de Sumar del Botón + a la Etiqueta de OPERACIONES//
@@ -187,13 +201,12 @@ public class Juego extends JFrame {
 					//Establecemos los Semáforos para evitar que se puedan poner dos
 					//signos a la vez y primero haya que tocar un dado y después
 					//introducir un signo//
-					esSuma=true;
 					tocaNumero=true;
+					esSuma=true;
 				}
 			}
 		});
 		sumar.setFont(new Font("Tahoma", Font.BOLD, 18));
-		sumar.setBounds(666, 152, 89, 34);
 		contentPane.add(sumar);
 		//------------------------------------------------------------------------//
 		
@@ -201,6 +214,7 @@ public class Juego extends JFrame {
 		
 		//----------------------------Boton RESTAR ------------------------------//
 		restar = new JButton(" - ");
+		restar.setBounds(765, 133, 89, 53);
 		restar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Pasa el Signo de Restar del Botón - a la Etiqueta de OPERACIONES//
@@ -209,25 +223,25 @@ public class Juego extends JFrame {
 					//Establecemos los Semáforos para evitar que se puedan poner dos
 					//signos a la vez y primero haya que tocar un dado y después
 					//introducir un signo//
-					esSuma=false; 
 					tocaNumero=true;
+					esSuma=false; 
 				}
 			}
 		});
 		restar.setFont(new Font("Tahoma", Font.BOLD, 18));
-		restar.setBounds(765, 152, 89, 34);
 		contentPane.add(restar);
 		//-----------------------------------------------------------------------//
 		
 		
 		//---------------------------OPERACIONES--------------------------------//
 		operaciones = new JTextField();
+		operaciones.setFont(new Font("Times New Roman", Font.BOLD, 12));
+		operaciones.setBounds(666, 197, 188, 20);
 		operaciones.setEditable(false);
 		operaciones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		operaciones.setBounds(666, 197, 188, 20);
 		contentPane.add(operaciones);
 		operaciones.setColumns(10);
 		//----------------------------------------------------------------------//
@@ -235,47 +249,50 @@ public class Juego extends JFrame {
 		
 		//-----------------------------MATHDICE---------------------------------//
 		mathDice = new JButton("MATHDICE");
+		mathDice.setForeground(Color.RED);
+		mathDice.setBounds(666, 228, 188, 27);
 		mathDice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(numerosIntroducidos > 1){ //Los Números introducidos han de ser mayores a 1//
 					resultadoOperacion.setText("Tu Resultado es: " +String.valueOf(operacion));
+					reiniciar.setEnabled(true); //Habilitamos el Botón Reiniciar//
 					if((numerosAlmacenadosDados12+1)==operacion){
 						resultadoCorrecto.setText(" CORRECTO!!!! ");
-						resultadoCorrecto.getIcon();
+						p1.setPuntos(p1.getPuntos()+5);//Por partida correcta obtenemos 5 puntos//
+						puntuacion.setText("Tu Puntuación es: " +p1.getPuntos());
 						mathDice.setEnabled(false); //Deshabilitamos el Botón Mathdice hasta una nueva partida//
-						reiniciar.setEnabled(true); //Habilitamos el Botón Reiniciar//
-						btLogin.setEnabled(true);//Habilitamos el Botón Login//
+						puntuacion.setForeground(Color.BLUE);//Cambia el color del Texto de Puntuación cuando se acierta//
+						v4.setPuntos(p1.getPuntos());//Actualizamos los Puntos para la Ventana Perfil//
 					}else{
 						resultadoCorrecto.setText(" Prueba Otra Vez ");
 						mathDice.setEnabled(false);//Deshabilitamos el Botón Mathdice hasta una nueva partida//
-						reiniciar.setEnabled(true);//Habilitamos el Botón Reiniciar//
-						btLogin.setEnabled(true);//Habilitamos el Botón Login//
 						}
 				}		
 			}
 		});
 		mathDice.setFont(new Font("Tahoma", Font.BOLD, 15));
-		mathDice.setBounds(666, 228, 188, 23);
 		contentPane.add(mathDice);
 		//----------------------------------------------------------------------//
 		
 		//----------------------RESULTADO OPERACION-----------------------------//
 		resultadoOperacion = new JLabel(" ");
-		resultadoOperacion.setHorizontalAlignment(SwingConstants.CENTER);
+		resultadoOperacion.setFont(new Font("Consolas", Font.BOLD, 14));
 		resultadoOperacion.setBounds(666, 263, 188, 53);
+		resultadoOperacion.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(resultadoOperacion);
 		//----------------------------------------------------------------------//
 		
 		//----------------------RESULTADO CORRECTO------------------------------//
 		resultadoCorrecto = new JLabel(" ");
+		resultadoCorrecto.setBounds(666, 319, 188, 53);
 		resultadoCorrecto.setFont(new Font("Stencil Std", Font.BOLD, 15));
 		resultadoCorrecto.setHorizontalAlignment(SwingConstants.CENTER);
-		resultadoCorrecto.setBounds(666, 319, 188, 53);
 		contentPane.add(resultadoCorrecto);
 		//---------------------------------------------------------------------//
 		
 		//--------------Boton REINICIAR----------------------------------------//
 		reiniciar = new JButton("Reiniciar");
+		reiniciar.setBounds(666, 451, 89, 23);
 		reiniciar.setEnabled(false);
 		reiniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -284,35 +301,29 @@ public class Juego extends JFrame {
 				inicioJuego();
 			}
 		});
-		
-		reiniciar.setBounds(666, 451, 89, 23);
 		contentPane.add(reiniciar);
 		//--------------------------------------------------------------//
 		
 		
 		//-------------------Boton para SALIR de la Aplicación-----------//
 		salir = new JButton("Salir");
+		salir.setBounds(765, 451, 89, 23);
 		salir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();//Botón para CERRAR la aplicación//
+				//dispose();//Botón para CERRAR la aplicación//
 				System.exit(0);//Acción para CERRAR todas las Ventanas//
 			}
 		});
-		salir.setBounds(765, 451, 89, 23);
 		contentPane.add(salir);
-		//---------------------------------------------------------------//
+		//----------------------------------------------------------------//
 		
-		//------------Botón para volver a la Ventana Login---------------//
-		btLogin = new JButton("<<< Login"); //Solo se habilita cuando se acaba la partida//
-		btLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				Login v1 = new Login();//Definimos la Ventana Login//
-				v1.setVisible(true); //Pasamos a la Ventana Login al presionar el botón << Login//
-				dispose(); //Cierra la Ventana Actual//
-			}
-		});
-		btLogin.setBounds(567, 451, 89, 23);
-		contentPane.add(btLogin);
+		//-------------Etiqueta Puntos-----------------------------------//
+		puntuacion = new JLabel("Tu Puntuación es: 0");
+		puntuacion.setForeground(Color.BLACK);
+		puntuacion.setFont(new Font("Consolas", Font.BOLD, 16));
+		puntuacion.setHorizontalAlignment(SwingConstants.CENTER);
+		puntuacion.setBounds(666, 389, 188, 51);
+		add(puntuacion);
 		//---------------------------------------------------------------//
 		
 		
@@ -333,16 +344,25 @@ public class Juego extends JFrame {
 	
 	
 	
-	//-----------Pasa el Nombre de la Ventana_Login a la Ventana_Jugador-------------//
-			public void setJugador(Jugador p1){
+	//Método para recoger el Nombre de la Ventana_Login a la Ventana Juego y los Puntos desde Perfil//
+			public void setJugador(Jugador p1 , Perfil v4){
 				this.p1=p1;
+				this.v4=v4;
 				Nombre_p1.setText("Bienvenid@ al Juego: " +p1.getNombre());
+				puntuacion.setText("Tu Puntuación es: " +String.valueOf(p1.getPuntos()));
 			}
-	//------------------------------------------------------------------------------//
+	//----------------------------------------------------------------------------------------------//
+	
+	//-----------Método para recoger el Nombre Actializado desde la Ventana Perfil-----------------//
+			public void setNombre(String nombre) {
+				p1.setNombre(nombre);
+				Nombre_p1.setText("Bienvenid@ al Juego: " +nombre);
+			}
+	//--------------------------------------------------------------------------------------------//
 			
 			
 	
-	//-----Método para iniciar el Juego con Imágenes Aleatorias para Dados de varias caras----//
+	//-----Método para iniciar el Juego con Imágenes Aleatorias para Dados de varias caras-------//
 			private void inicioJuego(){
 				//Definimos el ARRAY para el Dado de 3 Caras//
 				for(int i=0;i<dados3.length;i++)
@@ -404,7 +424,6 @@ public class Juego extends JFrame {
 				esSuma=true;
 				mathDice.setEnabled(true);
 				reiniciar.setEnabled(false);
-				btLogin.setEnabled(false);
 				
 		}	
 	//------------------------------------------------------------------------------------------------//
@@ -468,4 +487,6 @@ public class Juego extends JFrame {
 		}
 		//---------------------------------------------------------//		
 	}
+
+
 }

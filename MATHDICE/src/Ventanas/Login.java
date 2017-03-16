@@ -1,4 +1,4 @@
-package Ventana1_Login;
+package Ventanas;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.util.Random;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,19 +20,20 @@ import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 
-import Ventana2_Juego.Juego;
-import javax.swing.JComboBox;
+import Juego.Jugador;
+import javax.swing.ImageIcon;
 
 
 public class Login extends JFrame{
 	
 	//Generar Nuevo Jugador//
-	Jugador jugador1 = new Jugador();
+	Jugador p1 = new Jugador();
 
 	//Asignar Nombres a las Variables de los campos de Texto y a los Botones//
 	private JPanel contentPane;
 	private JTextField nombreJText, apellido1JText, apellido2JText, edadJText;
-	private JLabel EtiquetaJugador,EtiquetaNombre,EtiquetaApellido1,EtiquetaApellido2,EtiquetaEdad,generoJText,EtiquetaID;
+	private JLabel EtiquetaJugador,EtiquetaNombre,EtiquetaApellido1,
+	EtiquetaApellido2,EtiquetaEdad,generoJText,EtiquetaID, JLabelMando;
 	private JComboBox cbGenero;
 	private JTextField idJText;
 	private JButton btJugar;
@@ -52,13 +54,16 @@ public class Login extends JFrame{
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/javax/swing/plaf/basic/icons/JavaCup16.png")));
 		setBackground(Color.LIGHT_GRAY);
 		
+		
 				//Inicio Jugador//
-				jugador1.setNombre(" ");
-				jugador1.setApellido1(" ");
-				jugador1.setApellido2(" ");
-				jugador1.setEdad(99);
-				jugador1.setGenero(" ");
-				jugador1.setId(1);
+				p1.setNombre(" ");
+				p1.setApellido1(" ");
+				p1.setApellido2(" ");
+				p1.setEdad(99);
+				p1.setGenero(" ");
+				p1.setId(1);
+				p1.getPuntos();
+			
 				
 		
 				//---------------------Propiedades Ventana----------------------------//
@@ -95,6 +100,11 @@ public class Login extends JFrame{
 				
 				//-------------------Campo Texto para NOMBRE------------------------//
 				nombreJText = new JTextField();
+				nombreJText.setBackground(new Color(204, 255, 255));
+				nombreJText.setBounds(91, 39, 310, 20);
+				contentPane.add(nombreJText);
+				nombreJText.setColumns(10);
+				
 				//KEY LISTENER PARA EL NOMBRE// 
 				nombreJText.addKeyListener(new KeyAdapter() {
 					public void keyTyped(KeyEvent evt) {
@@ -103,7 +113,6 @@ public class Login extends JFrame{
 						if((c <'a' || c >'z') && (c < 'A' || c > 'Z') && (c !=KeyEvent.VK_SPACE)) evt.consume();
 					}
 				});
-				nombreJText.setBackground(new Color(204, 255, 255));
 				
 				//Action Listener Nombre//
 				nombreJText.addActionListener(new ActionListener() {
@@ -111,12 +120,9 @@ public class Login extends JFrame{
 						//Presionar ENTER y pasar al siguiente texto//
 						evt.setSource((char)KeyEvent.VK_ENTER);
 						apellido1JText.requestFocus();
-						jugador1.setNombre(nombreJText.getText()); //Pasamos los Datos a la Ventana Recogida de Datos// 	
+						p1.setNombre(nombreJText.getText()); //Pasamos los Datos a la Ventana Recogida de Datos// 	
 					}
 				});
-				nombreJText.setBounds(91, 39, 310, 20);
-				contentPane.add(nombreJText);
-				nombreJText.setColumns(10);
 				//----------------------------------------------------------------//
 				
 				
@@ -130,6 +136,11 @@ public class Login extends JFrame{
 				
 				//-------------Campo Texto para APELLIDO1-----------------------//
 				apellido1JText = new JTextField();
+				apellido1JText.setBackground(new Color(204, 255, 255));
+				apellido1JText.setBounds(91, 64, 310, 20);
+				contentPane.add(apellido1JText);
+				apellido1JText.setColumns(10);
+				
 				//KEY LISTENER para el APELLIDO1// 
 				apellido1JText.addKeyListener(new KeyAdapter() {
 					public void keyTyped(KeyEvent evt) {
@@ -138,7 +149,6 @@ public class Login extends JFrame{
 						if((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c !=KeyEvent.VK_SPACE)) evt.consume();
 					}
 				});
-				apellido1JText.setBackground(new Color(204, 255, 255));
 				
 				//Action Listener APELLIDO1//
 				apellido1JText.addActionListener(new ActionListener() {
@@ -146,12 +156,9 @@ public class Login extends JFrame{
 						//Presionar ENTER y pasar al siguiente texto//
 						evt.setSource((char)KeyEvent.VK_ENTER);
 						apellido2JText.requestFocus();
-						jugador1.setApellido1(apellido1JText.getText());//Pasamos los Datos a la Ventana Recogida de Datos//
+						p1.setApellido1(apellido1JText.getText());//Pasamos los Datos a la Ventana Recogida de Datos//
 					}
 				});
-				apellido1JText.setBounds(91, 64, 310, 20);
-				contentPane.add(apellido1JText);
-				apellido1JText.setColumns(10);
 				//-------------------------------------------------------------//
 			
 				
@@ -165,6 +172,11 @@ public class Login extends JFrame{
 				
 				//---------------Campo Texto para APELLIDO2------------------//
 				apellido2JText = new JTextField();
+				apellido2JText.setBackground(new Color(204, 255, 255));
+				apellido2JText.setBounds(91, 89, 310, 20);
+				contentPane.add(apellido2JText);
+				apellido2JText.setColumns(10);
+				
 				//KEY LISTENER para el APELLIDO2// 
 				apellido2JText.addKeyListener(new KeyAdapter() {
 					public void keyTyped(KeyEvent evt) {
@@ -174,7 +186,6 @@ public class Login extends JFrame{
 						//else if ( Character.isWhitespace( evt.getKeyCode())) evt.consume(); //No utilizar por el momento// 
 					}
 				});
-				apellido2JText.setBackground(new Color(204, 255, 255));
 				
 				//Action Listener APELLIDO2//
 				apellido2JText.addActionListener(new ActionListener() {
@@ -182,12 +193,9 @@ public class Login extends JFrame{
 						//Presionar ENTER y pasar al siguiente texto//
 						evt.setSource((char)KeyEvent.VK_ENTER);
 						edadJText.requestFocus();
-						jugador1.setApellido2(apellido2JText.getText());//Pasamos los Datos a la Ventana Recogida de Datos//
+						p1.setApellido2(apellido2JText.getText());//Pasamos los Datos a la Ventana Recogida de Datos//
 					}
 				});
-				apellido2JText.setBounds(91, 89, 310, 20);
-				contentPane.add(apellido2JText);
-				apellido2JText.setColumns(10);
 				//----------------------------------------------------------//
 				
 				
@@ -201,6 +209,11 @@ public class Login extends JFrame{
 				
 				//------------------Campo Texto para Edad----------------//
 				edadJText = new JTextField();
+				edadJText.setBackground(new Color(204, 255, 255));
+				edadJText.setBounds(91, 114, 310, 20);
+				contentPane.add(edadJText);
+				edadJText.setColumns(10);
+				
 				//KEY LISTENER PARA LA EDAD// 
 				edadJText.addKeyListener(new KeyAdapter() {
 					public void keyTyped(KeyEvent evt) {
@@ -209,7 +222,6 @@ public class Login extends JFrame{
 						if(c<'0' || c>'9') evt.consume();
 					}
 				});
-				edadJText.setBackground(new Color(204, 255, 255));
 				
 				//Action Listener EDAD//
 				edadJText.addActionListener(new ActionListener() {
@@ -220,15 +232,12 @@ public class Login extends JFrame{
 						
 						//Limita la Edad hasta 2 dígitos, si se escriben más dará un error//
 						if(edadJText.getText().length()==2){
-							jugador1.setEdad(Integer.parseInt(edadJText.getText()));
+							p1.setEdad(Integer.parseInt(edadJText.getText()));
 						}else{ 
-							jugador1.setEdad(99);
+							p1.setEdad(99);
 						}
 					}
 				});
-				edadJText.setBounds(91, 114, 310, 20);
-				contentPane.add(edadJText);
-				edadJText.setColumns(10);
 				//-------------------------------------------------------//
 				
 				
@@ -243,6 +252,10 @@ public class Login extends JFrame{
 				//-----------------Campo Texto para ID-----------------//
 				idJText = new JTextField();
 				idJText.setFont(new Font("Tahoma", Font.BOLD, 12));
+				idJText.setBounds(91, 138, 310, 20);
+				contentPane.add(idJText);
+				idJText.setColumns(10);
+				
 				//KEYLISTENER QUE IMPIDE QUE SE PUEDA MODIFICAR EL TEXTO DE LA ETIQUETA ID//
 				idJText.addKeyListener(new KeyAdapter() {
 					public void keyTyped(KeyEvent evt) {
@@ -260,12 +273,9 @@ public class Login extends JFrame{
 						//Presionar ENTER y pasar al siguiente texto//
 						evt.setSource((char)KeyEvent.VK_ENTER);
 						cbGenero.requestFocus();
-						jugador1.setId(Integer.parseInt(idJText.getText()));//Pasamos los Datos a la Ventana Recogida de Datos//
+						p1.setId(Integer.parseInt(idJText.getText()));//Pasamos los Datos a la Ventana Recogida de Datos//
 					}
 				});
-				idJText.setBounds(91, 138, 310, 20);
-				contentPane.add(idJText);
-				idJText.setColumns(10);
 				//--------------------------------------------------------//
 				
 				
@@ -278,18 +288,20 @@ public class Login extends JFrame{
 				
 				//----------------Campo Deplegable GENERO---------------//
 				cbGenero = new JComboBox();
-				//Action Listener en el ComoBox para poder seleccionar varias opciones dentro de la pestaña//
-				cbGenero.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						cbGenero.getSelectedItem().toString();
-						jugador1.setGenero(cbGenero.getSelectedItem().toString());//Pasamos los Datos a la Ventana Recogida de Datos//
-					}
-				});
 				cbGenero.addItem(" HOMBRE ");
 				cbGenero.addItem(" MUJER ");
 				cbGenero.setBackground(new Color(204, 255, 255));
 				cbGenero.setBounds(91, 168, 310, 20);
 				contentPane.add(cbGenero);
+				
+				//Action Listener en el ComoBox para poder seleccionar varias opciones dentro de la pestaña//
+				cbGenero.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						cbGenero.getSelectedItem().toString();
+						//Pasamos los Datos a la Ventana Recogida de Datos//
+						p1.setGenero(cbGenero.getSelectedItem().toString());
+					}
+				});
 				//---------------------------------------------------------//
 				
 				
@@ -299,6 +311,9 @@ public class Login extends JFrame{
 				btJugar = new JButton("JUGAR >>>");
 				btJugar.setForeground(new Color(0, 0, 0));
 				btJugar.setFont(new Font("Myriad Web Pro Condensed", Font.BOLD, 14));
+				btJugar.setBounds(183, 202, 122, 29);
+				contentPane.add(btJugar);
+				
 				//ActionListener Botón Jugar//
 				btJugar.addActionListener(new ActionListener() {	
 				public void actionPerformed(ActionEvent evt) {
@@ -306,11 +321,14 @@ public class Login extends JFrame{
 					Login v1 = new Login();
 					//Generar Nueva Variable v2 dentro del Botón JUGAR 
 					//para pasar a la siguiente Ventana de Juego.
-					Juego v2 = new Juego();
+					//Juego v2 = new Juego();
+					//Generar Nueva Variable para pasar de la Ventana Login a
+					//la Ventana Principal//
+					VentanaPrincipal v3 = new VentanaPrincipal();
 					
 					
 					//Action Listener para EDAD dentro del Boton JUGAR//
-					if (jugador1.getEdad()== 99){
+					if (p1.getEdad()== 99){
 						//Muestra otra ventana con la opción JOptionPane 
 						//donde se indica que la EDAD es incorrecta
 						JOptionPane.showMessageDialog(null, "La EDAD es Incorrecta - Vuélvala a Escribir y Pulse ENTER");
@@ -320,7 +338,7 @@ public class Login extends JFrame{
 					
 					//Action Listener cuando falta el NOMBRE  
 					//o existen espacios en BLANCO en los campos	
-					else if (jugador1.espaciosBlanco(jugador1.getNombre()))
+					else if (p1.espaciosBlanco(p1.getNombre()))
 					{
 						//Muestra otra Ventana, con la opción JOptionPane donde se indica que falta el Nombre del jugador//
 						JOptionPane.showMessageDialog(null, "Falta Nombre - Vuélvalo a Introducir y Pulse ENTER");
@@ -330,7 +348,7 @@ public class Login extends JFrame{
 					
 					//Action Listener cuando falta el APELLIDO1  
 					//o existen espacios en BLANCO en los campos
-					else if (jugador1.espaciosBlanco(jugador1.getApellido1()))
+					else if (p1.espaciosBlanco(p1.getApellido1()))
 					{
 						//Muestra otra Ventana donde se indica que falta el Apellido1 del jugador//
 						JOptionPane.showMessageDialog(null, "Falta Apellido1 - Vuélvalo a Introducir y Pulse ENTER");
@@ -339,7 +357,7 @@ public class Login extends JFrame{
 					}
 					//Action Listener cuando falta el APELLIDO2  
 					//o existen espacios en BLANCO en los campos//
-					else if (jugador1.espaciosBlanco(jugador1.getApellido2()))
+					else if (p1.espaciosBlanco(p1.getApellido2()))
 						
 					{
 						//Muestra otra Ventana donde se indica que falta el Apellido2 del jugador//
@@ -348,24 +366,32 @@ public class Login extends JFrame{
 						return;
 						
 					}else{
-					//Salida de Datos en Ventana Login//
-					datosJugadorJText.setText("JUGADOR: "+jugador1.getNombre()+ " " +jugador1.getApellido1()+ " " +jugador1.getApellido2()+ " " +jugador1.getEdad()+ " " +jugador1.getId()+ " " +jugador1.getGenero());
+					//Recogida de Datos en Ventana Login//
+					datosJugadorJText.setText("JUGADOR: "+p1.getNombre()+ " " +p1.getApellido1()+ " " 
+					+p1.getApellido2()+ " " +p1.getEdad()+ " " +p1.getId()+ " " +p1.getGenero());
 					}
 					
 					//Se introduce una excepción con Try para evitar errores al pasar a la ventana Juego//
 						try{
-						v2.setVisible(true);//Pasar a Ventana_Juego al presionar el botón JUGAR//
+						v3.setVisible(true);//Pasar a VentanaPrincipal al presionar el botón JUGAR//
 						}catch (Exception e){
 							e.getMessage();
 						}
 				
 					
-					//Se introduce una excepción con Try para evitar errores al pasar el Nombre a la ventana Juego//
+					//Se introduce una excepción con Try para evitar errores al pasar el Nombre 
+					// a la ventana Juego//
 				    	try {
-				    	//Pasar el Nombre de la Ventana LOGIN a la Ventana JUEGO mediante la creación de una nueva variable llamada p1//
+				    	//Pasar el Nombre de la Ventana LOGIN a la Ventana JUEGO mediante la creación de una nueva variable 
+				    	//llamada p1//
 						Jugador p1 = new Jugador();
 						p1.setNombre(nombreJText.getText());
-				    	v2.setJugador(p1); //Nombre del Jugador es enviado a la Ventana_Juego//
+						p1.setApellido1(apellido1JText.getText());//Habilitamos el Apellido1 a la Ventana Principal//
+						p1.setApellido2(apellido2JText.getText());//Habilitamos el Apellido2 a la Ventana Principal//
+						p1.setEdad(Integer.parseInt(edadJText.getText()));//Habilitamos la Edad a la Ventana Principal//
+						p1.setId(Integer.parseInt(idJText.getText())); //Habilitamos el ID a la Ventana Principal//
+						p1.setGenero(cbGenero.getSelectedItem().toString());//Habilitamos el Género a la Ventana Principal//
+				    	v3.setJugador(p1); //Nombre del Jugador es enviado a la Ventana_Juego y datos a la Ventana Principal//
 				    	}catch (Exception e){
 				    		e.getMessage();
 				    	}
@@ -383,15 +409,13 @@ public class Login extends JFrame{
 				    		apellido2JText.setEnabled(false);
 				    		edadJText.setEnabled(false);
 				    		cbGenero.setEnabled(false);
-				    		
 				    	}
 					
 					//Salida de Datos en Consola Java//
-					System.out.println("Jugador: "+jugador1.getNombre()+ " " +jugador1.getApellido1()+ " " +jugador1.getApellido2()+ " " +jugador1.getEdad()+ " años " + " " +jugador1.getId()+ " " +jugador1.getGenero());
+					System.out.println("Jugador: "+p1.getNombre()+ " " +p1.getApellido1()+ " " 
+					+p1.getApellido2()+ " " +p1.getEdad()+ " años " + " " +p1.getId()+ " " +p1.getGenero());
 				 	}
 				});
-				btJugar.setBounds(183, 202, 122, 29);
-				contentPane.add(btJugar);
 				//------------------------------------Final Código Botón JUGAR----------------------//
 				
 				
@@ -406,7 +430,13 @@ public class Login extends JFrame{
 				datosJugadorJText.setEnabled(false);//Inhabilitamos el campo de la recogida de datos//
 				//-------------------------------------------------------------------------------------//
 				
+				//-----------------------Imagen Mando Jugador------------------------------------------//
+				JLabelMando = new JLabel("");
+				JLabelMando.setIcon(new ImageIcon(Login.class.getResource("/imagenes/mando.png")));
+				JLabelMando.setBounds(91, 199, 59, 35);
+				contentPane.add(JLabelMando);
+				//-------------------------------------------------------------------------------------//
+				
 	}
-	//--------------------------------------------FIN VENTANA LOGIN--------------------------------------------------------------------//
 }
 
