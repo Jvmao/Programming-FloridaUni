@@ -5,20 +5,23 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import Juego.Jugador;
+
+import Jugador.Jugador;
+
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
-import java.awt.Component;
-import javax.swing.Box;
+import javax.swing.JComboBox;
 
 public class Perfil extends JPanel {
 	
@@ -34,11 +37,10 @@ public class Perfil extends JPanel {
 	JLabelEdad, JLabelID, JLabelGenero, JLabelPuntos,
 	JLabelPerfil1,JLabelPerfil2,JLabelPerfil3,JLabelDatos;
 	private JTextField JTextNombre, JTextApellido1 , JTextApellido2, 
-	JTextEdad, JTextID, JTextGenero, JTextPuntos;
+	JTextEdad, JTextID, JTextGenero,JTextPuntos;
 	private JButton JButtonDatos, JButtonSalir;
 	private JTextPane JPaneDatos;
-	
-	
+
 	
 	
 	public Perfil() {
@@ -58,68 +60,81 @@ public class Perfil extends JPanel {
 		JLabelFoto1 = new JLabel("");
 		JLabelFoto1.setIcon(new ImageIcon(Perfil.class.getResource("/imagenes/hombre.png")));
 		
-		//Etiqueta y Campo de Texto Para Nombre//
+		//Etiqueta Nombre//
 		JLabelNombre = new JLabel("NOMBRE");
 		JLabelNombre.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
+		//Campo de Texto para Nombre//
 		JTextNombre = new JTextField();
+		JTextNombre.setBackground(new Color(176, 224, 230));
 		JTextNombre.setColumns(10);
+		JTextNombre.addKeyListener(new innerKL());//Añadimos el KeyListener desde la InnerClass//
+		JTextNombre.addActionListener(new innerAction()); //Añadimos el ActionListener desde la InnerClass//
 		
-		//Etiqueta y Campo de Texto Para Apellido1//
+		//Etiqueta Apellido1//
 		JLabelApellido1 = new JLabel("APELLIDO1");
 		JLabelApellido1.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
+		//Campo de Texto para Apellido1//
 		JTextApellido1 = new JTextField();
+		JTextApellido1.setBackground(new Color(176, 224, 230));
 		JTextApellido1.setColumns(10);
+		JTextApellido1.addKeyListener(new innerKL());//Añadimos el KeyListener desde la InnerClass//
+		JTextApellido1.addActionListener(new innerAction()); //Añadimos el ActionListener desde la InnerClass//
 		
 		//Etiqueta y Campo de Texto Para Apellido2//
 		JLabelApellido2 = new JLabel("APELLIDO2");
 		JLabelApellido2.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
+		//Campo de Texto para Apellido2//
 		JTextApellido2 = new JTextField();
+		JTextApellido2.setBackground(new Color(176, 224, 230));
 		JTextApellido2.setColumns(10);
+		JTextApellido2.addKeyListener(new innerKL());//Añadimos el KeyListener desde la InnerClass//
+		JTextApellido2.addActionListener(new innerAction()); //Añadimos el ActionListener desde la InnerClass//
 		
-		//Etiqueta y Campo de Texto Para Edad//
+		//Etiqueta Edad//
 		JLabelEdad = new JLabel("EDAD");
 		JLabelEdad.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
+		//Campo de Texto para Edad//
 		JTextEdad = new JTextField();
+		JTextEdad.setBackground(new Color(176, 224, 230));
 		JTextEdad.setColumns(10);
+		JTextEdad.addKeyListener(new innerKL());//Añadimos el KeyListener desde la InnerClass//
+		JTextEdad.addActionListener(new innerAction()); //Añadimos el ActionListener desde la InnerClass//
 		
-		//Etiqueta y Campo de Texto Para ID//
+		//Etiqueta ID//
 		JLabelID = new JLabel("ID");
 		JLabelID.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
+		//Campo de Texto para ID//
 		JTextID = new JTextField();
+		JTextID.setBackground(new Color(176, 224, 230));
 		JTextID.setEditable(false);
 		JTextID.setColumns(10);
 		
 		//Etiqueta y Campo de Texto para Género//
 		JLabelGenero = new JLabel("GÉNERO");
 		JLabelGenero.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
+		
+		//Campo de texto para Género//
 		JTextGenero = new JTextField();
+		JTextGenero.setBackground(new Color(176, 224, 230));
 		JTextGenero.setColumns(10);
+		JTextGenero.addKeyListener(new innerKL()); //Añadimos el KeyListener desde la InnerClass//
+		JTextGenero.addActionListener(new innerAction()); //Añadimos el ActionListener desde la InnerClass//
 		
 		//Etiqueta y Campo de Texto para Puntos//
 		JLabelPuntos = new JLabel("PUNTOS");
 		JLabelPuntos.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
+		//Campor de Texto para Puntos//
 		JTextPuntos = new JTextField();
+		JTextPuntos.setBackground(new Color(176, 224, 230));
 		JTextPuntos.setEditable(false);
 		JTextPuntos.setColumns(10);
 		
 		//Botón para Actualizar Datos//
 		JButtonDatos = new JButton("ACTUALIZAR DATOS");
-		JButtonDatos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				p1.setNombre(JTextNombre.getText());
-				p1.setApellido1(JTextApellido1.getText());
-				p1.setApellido2(JTextApellido2.getText());  
-				p1.setEdad(Integer.valueOf(JTextEdad.getText()));
-				p1.setId(Integer.valueOf(JTextID.getText()));
-				p1.setGenero(JTextGenero.getText());
-				JPaneDatos.setText("Perfil Actualizado Correctamente:\n"+p1);
-				//Pasamos el Nombre del Jugador Actualizado a Ventana Juego
-				//mediante el método creado en esta ventana y el de la clase juego//
-				v2.setNombre(p1.getNombre());
-			}
-		});
+		JButtonDatos.setEnabled(false);
 		JButtonDatos.setForeground(Color.BLUE);
 		JButtonDatos.setFont(new Font("Showcard Gothic", Font.PLAIN, 14));
+		JButtonDatos.addActionListener(new innerAL()); //Añadimos el ActionListener desde la Inner Class//
 		
 		//Etiqueta Datos//
 		JLabelDatos = new JLabel("DATOS");
@@ -130,18 +145,15 @@ public class Perfil extends JPanel {
 		//Panel para Recoger los Datos Actualizados//
 		JPaneDatos = new JTextPane();
 		JPaneDatos.setBackground(new Color(204, 255, 204));
-		JPaneDatos.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 12));
+		JPaneDatos.setFont(new Font("Tekton Pro Ext", Font.PLAIN, 15));
 		JPaneDatos.setEditable(false);
 		
 		//Botón Salir//
 		JButtonSalir = new JButton("Salir");
 		JButtonSalir.setForeground(Color.DARK_GRAY);
 		JButtonSalir.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
-		JButtonSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0); //Acción para Cerrar Todas las Ventanas y Salir de la Aplicación//
-			}
-		});
+		JButtonSalir.addActionListener(new innerAL());//Añadimos el ActionListener desde la Inner Class//
+		
 		
 		//Iconos Jugador//
 		JLabelPerfil3 = new JLabel("");
@@ -158,50 +170,48 @@ public class Perfil extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(JLabelPerfil1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(JLabelPerfil2, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(8)
-									.addComponent(JLabelPerfil3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addComponent(JLabelFoto1, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
-							.addGap(39)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(JButtonDatos, GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+								.addComponent(JLabelPerfil1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(JLabelApellido2, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(JTextApellido2, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(JLabelPuntos, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-										.addComponent(JLabelGenero, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-										.addComponent(JLabelEdad, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-										.addComponent(JLabelID, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-										.addComponent(JLabelApellido1, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-										.addComponent(JLabelNombre, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
-									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(JTextApellido1, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-										.addComponent(JTextNombre, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-										.addComponent(JTextID, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-										.addComponent(JTextEdad, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-										.addComponent(JTextGenero, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-										.addComponent(JTextPuntos, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
-									.addPreferredGap(ComponentPlacement.RELATED)))))
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(JButtonSalir, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+										.addComponent(JLabelPerfil2, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+										.addComponent(JLabelFoto1, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+										.addComponent(JLabelPerfil3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+									.addGap(39)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(JButtonDatos, GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(JLabelApellido2, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(JTextApellido2, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+											.addPreferredGap(ComponentPlacement.RELATED))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+												.addComponent(JLabelPuntos, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+												.addComponent(JLabelGenero, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+												.addComponent(JLabelEdad, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+												.addComponent(JLabelID, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+												.addComponent(JLabelApellido1, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+												.addComponent(JLabelNombre, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(JTextGenero, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+												.addComponent(JTextApellido1, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+												.addComponent(JTextNombre, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+												.addComponent(JTextID, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+												.addComponent(JTextEdad, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+												.addComponent(JTextPuntos, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
+											.addPreferredGap(ComponentPlacement.RELATED)))))
 							.addGap(64)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(JPaneDatos, GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-								.addComponent(JLabelDatos, GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))))
-					.addGap(68))
+								.addComponent(JLabelDatos, GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
+							.addGap(68))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(JButtonSalir, GroupLayout.PREFERRED_SIZE, 196, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -258,9 +268,9 @@ public class Perfil extends JPanel {
 							.addGap(31)
 							.addComponent(JButtonDatos))
 						.addComponent(JLabelPerfil3, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
-					.addGap(33)
+					.addGap(36)
 					.addComponent(JButtonSalir)
-					.addGap(83))
+					.addGap(80))
 		);
 		setLayout(groupLayout);
 	}
@@ -275,6 +285,7 @@ public class Perfil extends JPanel {
 		JTextEdad.setText(String.valueOf(p1.getEdad()));
 		JTextID.setText(String.valueOf(p1.getId()));
 		JTextGenero.setText(p1.getGenero());
+		//comboGenero.setSelectedItem(p1.getGenero().toString());
 		JTextPuntos.setText(String.valueOf(p1.getPuntos()));
 		}
 	
@@ -284,4 +295,95 @@ public class Perfil extends JPanel {
 		JTextPuntos.setText(String.valueOf(p1.getPuntos()));
 	}
 	
+	//INNER CLASSES//
+	private class innerKL implements KeyListener{
+		public void keyPressed(KeyEvent arg0) {
+		}
+
+		public void keyReleased(KeyEvent arg0) {	
+		}
+
+		public void keyTyped(KeyEvent e) {
+			JTextField j = (JTextField)e.getSource();
+			if(j == JTextNombre){
+				char c = e.getKeyChar();
+				//SOLO ADMITE LETRAS EN MAYÚSCULA,MINÚSCULA Y LA TECLA SPACE, PERO NO NÚMEROS//
+				if((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c !=KeyEvent.VK_SPACE)) e.consume();
+				//LIMITAMOS EL TAMAÑO DEL TEXTO A 15 CARÁCTERES//
+				if(JTextNombre.getText().length()==15) e.consume();
+				JButtonDatos.setEnabled(true); //Habilitamos el Botón de Actualizar Datos al modificar el Texto//
+			}else if(j == JTextApellido1){
+				char c = e.getKeyChar();
+				//SOLO ADMITE LETRAS EN MAYÚSCULA,MINÚSCULA Y LA TECLA SPACE PERO NO NÚMEROS//
+				if((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c !=KeyEvent.VK_SPACE)) e.consume();
+				//LIMITAMOS EL TAMAÑO DEL TEXTO A 20 CARÁCTERES//
+				if(JTextApellido1.getText().length()==20) e.consume();
+				JButtonDatos.setEnabled(true); //Habilitamos el Botón de Actualizar Datos al modificar el Texto//
+			}else if(j == JTextApellido2){
+				char c = e.getKeyChar();
+				//SOLO ADMITE LETRAS EN MAYÚSCULA,MINÚSCULA Y LA TECLA SPACE PERO NO NÚMEROS//
+				if((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && (c !=KeyEvent.VK_SPACE)) e.consume();
+				//LIMITAMOS EL TAMAÑO DEL TEXTO A 20 CARÁCTERES//
+				if(JTextApellido2.getText().length()==20) e.consume();
+				JButtonDatos.setEnabled(true); //Habilitamos el Botón de Actualizar Datos al modificar el Texto//
+			}else if(j == JTextEdad){
+				//SOLO ADMITE NÚMEROS Y NO LETRAS//
+				char d = e.getKeyChar();
+				if(d<'0' || d>'9')e.consume(); 
+				//LIMITAMOS EL TAMAÑO DEL TEXTO A 2 CARÁCTERES//
+				if(JTextEdad.getText().length()==2) e.consume();
+				JButtonDatos.setEnabled(true); //Habilitamos el Botón de Actualizar Datos al modificar el Texto//
+			}else if(j == JTextGenero){
+				char c = e.getKeyChar();
+				//SOLO ADMITE LETRAS EN MAYÚSCULA//
+				if((c < 'A' || c > 'Z')) e.consume();
+				//LIMITAMOS LA EL TAMAÑO DEL TEXTO A 7 CARÁCTERES//
+				if(JTextGenero.getText().length()==7) e.consume();
+				JButtonDatos.setEnabled(true); //Habilitamos el Botón de Actualizar Datos al modificar el Texto//
+			}
+				
+		}
+		
+	}
+	
+	private class innerAL implements ActionListener{ //ActionListener para Botones//
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == JButtonDatos){
+				p1.setNombre(JTextNombre.getText());
+				p1.setApellido1(JTextApellido1.getText());
+				p1.setApellido2(JTextApellido2.getText());  
+				p1.setEdad(Integer.valueOf(JTextEdad.getText()));
+				p1.setId(Integer.valueOf(JTextID.getText()));
+				p1.setGenero(JTextGenero.getText());
+				JPaneDatos.setText("*Perfil Actualizado Correctamente*\n"+p1);
+				//Pasamos el Nombre del Jugador Actualizado a Ventana Juego
+				//mediante el método creado en esta ventana y el de la clase juego//
+				v2.setNombre(p1.getNombre());
+			}
+			if (e.getSource() == JButtonSalir){
+				System.exit(0);//Al presionar el Botón SALIR salimos de la aplicación//
+			}
+
+		}
+	}
+	
+	private class innerAction implements ActionListener{//ActionListener para Campos de Texto//
+		public void actionPerformed(ActionEvent e) {
+			JTextField z = (JTextField)e.getSource();
+			if(z == JTextNombre){
+				e.setSource((char)KeyEvent.VK_ENTER);//Al presionar la tecla ENTER pasamos al siguiente campo//
+				JTextApellido1.requestFocus();
+			}else if(z == JTextApellido1){
+				e.setSource((char)KeyEvent.VK_ENTER);
+				JTextApellido2.requestFocus();
+			}else if(z == JTextApellido2){
+				e.setSource((char)KeyEvent.VK_ENTER);
+				JTextEdad.requestFocus();
+			}else if(z == JTextEdad){
+				e.setSource((char)KeyEvent.VK_ENTER);
+				JTextGenero.requestFocus();
+			}
+		}
+	}
+		
 }

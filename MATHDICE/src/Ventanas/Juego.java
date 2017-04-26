@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import Juego.Jugador;
+import Jugador.Jugador;
 
 //Abrir la nueva clase con la opción JFrame//
 public class Juego extends JPanel {
@@ -71,7 +71,7 @@ public class Juego extends JPanel {
 	
 	//Variable Boolean para tocaNumero y esSuma y así poder utilizar semáforos//
 	private boolean tocaNumero = true; 
-	private boolean esSuma = true; //esSuma//
+	private boolean esSuma = true; 
 	//Variables int para realizar las operaciones//
 	private int numerosIntroducidos=0;
 	private int operacion=0;
@@ -173,7 +173,7 @@ public class Juego extends JPanel {
 		
 		//-----------------Imagen Estática 1--------------------------------------------------//
 		imagenEstatica1 = new JLabel("");
-		imagenEstatica1.setBounds(666, 31, 89, 97);
+		imagenEstatica1.setBounds(607, 11, 112, 97);
 		imagenEstatica1.setHorizontalAlignment(SwingConstants.CENTER);
 		//Cargamos la imagen desde la carpeta de imagenes//
 		imagenEstatica1.setIcon(new ImageIcon(Juego.class.getResource("/imagenes/IronMan.png")));
@@ -182,7 +182,7 @@ public class Juego extends JPanel {
 		
 		//-----------------Imagen Estática 2--------------------------------------------------//
 		imagenEstatica2 = new JLabel("");
-		imagenEstatica2.setBounds(765, 31, 89, 97);
+		imagenEstatica2.setBounds(742, 11, 112, 97);
 		//Cargamos la imagen desde la carpeta de imagenes//
 		imagenEstatica2.setIcon(new ImageIcon(Juego.class.getResource("/imagenes/SpiderMan.png")));
 		imagenEstatica2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -192,21 +192,9 @@ public class Juego extends JPanel {
 		
 		//--------------------------------Boton SUMAR------------------------------//
 		sumar = new JButton(" + ");
-		sumar.setBounds(666, 133, 89, 53);
-		sumar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//Pasa el Signo de Sumar del Botón + a la Etiqueta de OPERACIONES//
-				if(!tocaNumero){
-					operaciones.setText(operaciones.getText()+" + ");
-					//Establecemos los Semáforos para evitar que se puedan poner dos
-					//signos a la vez y primero haya que tocar un dado y después
-					//introducir un signo//
-					tocaNumero=true;
-					esSuma=true;
-				}
-			}
-		});
-		sumar.setFont(new Font("Tahoma", Font.BOLD, 18));
+		sumar.setBounds(607, 119, 112, 53);
+		sumar.addActionListener(new innerButton());//Añadimos el ActionListener desde la Inner Class///
+		sumar.setFont(new Font("Tahoma", Font.BOLD, 24));
 		contentPane.add(sumar);
 		//------------------------------------------------------------------------//
 		
@@ -214,34 +202,20 @@ public class Juego extends JPanel {
 		
 		//----------------------------Boton RESTAR ------------------------------//
 		restar = new JButton(" - ");
-		restar.setBounds(765, 133, 89, 53);
-		restar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//Pasa el Signo de Restar del Botón - a la Etiqueta de OPERACIONES//
-				if(!tocaNumero){
-					operaciones.setText(operaciones.getText()+" - ");
-					//Establecemos los Semáforos para evitar que se puedan poner dos
-					//signos a la vez y primero haya que tocar un dado y después
-					//introducir un signo//
-					tocaNumero=true;
-					esSuma=false; 
-				}
-			}
-		});
-		restar.setFont(new Font("Tahoma", Font.BOLD, 18));
+		restar.setBounds(742, 119, 112, 53);
+		restar.addActionListener(new innerButton());//Añadimos el ActionListener desde la Inner Class//
+		restar.setFont(new Font("Tahoma", Font.BOLD, 24));
 		contentPane.add(restar);
 		//-----------------------------------------------------------------------//
 		
 		
 		//---------------------------OPERACIONES--------------------------------//
 		operaciones = new JTextField();
-		operaciones.setFont(new Font("Times New Roman", Font.BOLD, 12));
-		operaciones.setBounds(666, 197, 188, 20);
+		operaciones.setBackground(new Color(153, 255, 204));
+		operaciones.setHorizontalAlignment(SwingConstants.CENTER);
+		operaciones.setFont(new Font("Tekton Pro Ext", Font.BOLD, 16));
+		operaciones.setBounds(607, 182, 247, 35);
 		operaciones.setEditable(false);
-		operaciones.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		contentPane.add(operaciones);
 		operaciones.setColumns(10);
 		//----------------------------------------------------------------------//
@@ -249,71 +223,46 @@ public class Juego extends JPanel {
 		
 		//-----------------------------MATHDICE---------------------------------//
 		mathDice = new JButton("MATHDICE");
+		mathDice.setBackground(Color.LIGHT_GRAY);
 		mathDice.setForeground(Color.RED);
-		mathDice.setBounds(666, 228, 188, 27);
-		mathDice.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(numerosIntroducidos > 1){ //Los Números introducidos han de ser mayores a 1//
-					resultadoOperacion.setText("Tu Resultado es: " +String.valueOf(operacion));
-					reiniciar.setEnabled(true); //Habilitamos el Botón Reiniciar//
-					if((numerosAlmacenadosDados12+1)==operacion){
-						resultadoCorrecto.setText(" CORRECTO!!!! ");
-						p1.setPuntos(p1.getPuntos()+5);//Por partida correcta obtenemos 5 puntos//
-						puntuacion.setText("Tu Puntuación es: " +p1.getPuntos());
-						mathDice.setEnabled(false); //Deshabilitamos el Botón Mathdice hasta una nueva partida//
-						puntuacion.setForeground(Color.BLUE);//Cambia el color del Texto de Puntuación cuando se acierta//
-						v4.setPuntos(p1.getPuntos());//Actualizamos los Puntos para la Ventana Perfil//
-					}else{
-						resultadoCorrecto.setText(" Prueba Otra Vez ");
-						mathDice.setEnabled(false);//Deshabilitamos el Botón Mathdice hasta una nueva partida//
-						}
-				}		
-			}
-		});
+		mathDice.setBounds(607, 220, 247, 35);
+		mathDice.addActionListener(new innerButton());//Añadimos el ActionListener desde la Inner Class//
 		mathDice.setFont(new Font("Tahoma", Font.BOLD, 15));
 		contentPane.add(mathDice);
 		//----------------------------------------------------------------------//
 		
 		//----------------------RESULTADO OPERACION-----------------------------//
 		resultadoOperacion = new JLabel(" ");
-		resultadoOperacion.setFont(new Font("Consolas", Font.BOLD, 14));
-		resultadoOperacion.setBounds(666, 263, 188, 53);
+		resultadoOperacion.setForeground(new Color(0, 153, 51));
+		resultadoOperacion.setFont(new Font("Consolas", Font.BOLD, 16));
+		resultadoOperacion.setBounds(607, 263, 247, 53);
 		resultadoOperacion.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(resultadoOperacion);
 		//----------------------------------------------------------------------//
 		
 		//----------------------RESULTADO CORRECTO------------------------------//
 		resultadoCorrecto = new JLabel(" ");
-		resultadoCorrecto.setBounds(666, 319, 188, 53);
-		resultadoCorrecto.setFont(new Font("Stencil Std", Font.BOLD, 15));
+		resultadoCorrecto.setBounds(607, 319, 247, 53);
+		resultadoCorrecto.setFont(new Font("Stencil Std", Font.BOLD, 17));
 		resultadoCorrecto.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(resultadoCorrecto);
 		//---------------------------------------------------------------------//
 		
 		//--------------Boton REINICIAR----------------------------------------//
-		reiniciar = new JButton("Reiniciar");
-		reiniciar.setBounds(666, 451, 89, 23);
+		reiniciar = new JButton("Volver a \r\nJugar");
+		reiniciar.setFont(new Font("Tekton Pro", Font.BOLD, 15));
+		reiniciar.setBounds(607, 451, 148, 44);
 		reiniciar.setEnabled(false);
-		reiniciar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//Reinicia el Campo de Dados cargando nuevas imágenes 
-				//así como reiniciando el MouseListener y valores
-				inicioJuego();
-			}
-		});
+		reiniciar.addActionListener(new innerButton());//Añadimos el ActionListener desde la Inner Class//
 		contentPane.add(reiniciar);
 		//--------------------------------------------------------------//
 		
 		
 		//-------------------Boton para SALIR de la Aplicación-----------//
 		salir = new JButton("Salir");
-		salir.setBounds(765, 451, 89, 23);
-		salir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//dispose();//Botón para CERRAR la aplicación//
-				System.exit(0);//Acción para CERRAR todas las Ventanas//
-			}
-		});
+		salir.setFont(new Font("Tekton Pro", Font.BOLD, 14));
+		salir.setBounds(765, 451, 89, 44);
+		salir.addActionListener(new innerButton());//Añadimos el ActionListener desde la Inner Class//
 		contentPane.add(salir);
 		//----------------------------------------------------------------//
 		
@@ -322,7 +271,7 @@ public class Juego extends JPanel {
 		puntuacion.setForeground(Color.BLACK);
 		puntuacion.setFont(new Font("Consolas", Font.BOLD, 16));
 		puntuacion.setHorizontalAlignment(SwingConstants.CENTER);
-		puntuacion.setBounds(666, 389, 188, 51);
+		puntuacion.setBounds(607, 389, 247, 51);
 		add(puntuacion);
 		//---------------------------------------------------------------//
 		
@@ -344,7 +293,7 @@ public class Juego extends JPanel {
 	
 	
 	
-	//Método para recoger el Nombre de la Ventana_Login a la Ventana Juego y los Puntos desde Perfil//
+	//Método para recoger el Nombre de la Ventana Login a la Ventana Juego y los Puntos desde Perfil//
 			public void setJugador(Jugador p1 , Perfil v4){
 				this.p1=p1;
 				this.v4=v4;
@@ -470,23 +419,70 @@ public class Juego extends JPanel {
 			
 		}
 		//MouseListener sin Utilizar------------------------------//
-		@Override
 		public void mouseEntered(MouseEvent arg0) {
 		}
-
-		@Override
 		public void mouseExited(MouseEvent arg0) {
 		}
-
-		@Override
 		public void mousePressed(MouseEvent arg0) {
 		}
-
-		@Override
 		public void mouseReleased(MouseEvent arg0) {
 		}
 		//---------------------------------------------------------//		
 	}
+	//-----------------------------------------------------------------------------------------------//
+	
+	//----------------------------INNER CLASS PARA JBUTTON-------------------------------------------//
+	public class innerButton implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			JButton boton = (JButton)e.getSource();
+			if(boton == sumar){
+				//Pasa el Signo de Sumar del Botón + a la Etiqueta de OPERACIONES//
+				if(!tocaNumero){
+					operaciones.setText(operaciones.getText()+" + ");
+					//Establecemos los Semáforos para evitar que se puedan poner dos
+					//signos a la vez y primero haya que tocar un dado y después
+					//introducir un signo//
+					tocaNumero=true;
+					esSuma=true;
+				}
+			}else if(boton == restar){
+				//Pasa el Signo de Restar del Botón - a la Etiqueta de OPERACIONES//
+				if(!tocaNumero){
+					operaciones.setText(operaciones.getText()+" - ");
+					//Establecemos los Semáforos para evitar que se puedan poner dos
+					//signos a la vez y primero haya que tocar un dado y después
+					//introducir un signo//
+					tocaNumero=true;
+					esSuma=false; 
+				}
+			}else if(boton == mathDice){
+				if(numerosIntroducidos > 1){ //Los Números introducidos han de ser mayores a 1//
+					resultadoOperacion.setText("Tu Resultado es: " +String.valueOf(operacion));
+					reiniciar.setEnabled(true); //Habilitamos el Botón Reiniciar//
+					if((numerosAlmacenadosDados12+1)==operacion){
+						resultadoCorrecto.setText(" CORRECTO!!!! ");
+						p1.setPuntos(p1.getPuntos()+5);//Por partida correcta obtenemos 5 puntos//
+						puntuacion.setText("Tu Puntuación es: " +p1.getPuntos());
+						mathDice.setEnabled(false); //Deshabilitamos el Botón Mathdice hasta una nueva partida//
+						puntuacion.setForeground(Color.BLUE);//Cambia el color del Texto de Puntuación cuando se acierta//
+						v4.setPuntos(p1.getPuntos());//Actualizamos los Puntos para la Ventana Perfil//
+					}else{
+						resultadoCorrecto.setText(" Prueba Otra Vez ");
+						mathDice.setEnabled(false);//Deshabilitamos el Botón Mathdice hasta una nueva partida//
+					}
+				}	
+			}else if (boton == reiniciar){
+				//Reinicia el Campo de Dados cargando nuevas imágenes 
+				//así como reiniciando el MouseListener y valores
+				inicioJuego();
+			}else if (boton == salir){
+				//dispose();//Botón para CERRAR la aplicación//
+				System.exit(0);//Acción para CERRAR todas las Ventanas//
+			}
+			
+		}
+		
+	}
 
-
+	//-----------------------------------------------------------------------------------------------//
 }

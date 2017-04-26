@@ -2,7 +2,7 @@ package Principal;
 
 import javax.swing.JFrame;
 
-import Juego.Jugador;
+import Jugador.Jugador;
 import Ventanas.Login;
 import Ventanas.VentanaPrincipal;
 

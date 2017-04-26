@@ -12,7 +12,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Juego.Jugador;
+import Jugador.Jugador;
 
 public class VentanaPrincipal extends JFrame {
 

@@ -1,4 +1,4 @@
-package Juego;
+package Jugador;
 
 public class Jugador {
 	//Variables// 
@@ -90,8 +90,9 @@ public class Jugador {
 				}
 				
 				public String toString(){
-					return this.nombre+ " " +this.apellido1+ " " +this.apellido2+ " " +this.edad+ " años " 
-							+this.genero+ " "+this.id+ " "+this.puntos+ " puntos ";
+					return "Nombre:  " +this.nombre+ "\nPrimer Apellido:  " +this.apellido1+
+							"\nSegundo Apellido:  " +this.apellido2+ "\nEdad:  " +this.edad+ " años " +"\nGénero:  "
+							+this.genero+ "\nCódigo:  "+this.id+ "\nPuntos Jugador:  "+this.puntos+ " puntos ";
 				}
 				
 }
