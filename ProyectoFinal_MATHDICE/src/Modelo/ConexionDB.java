@@ -24,7 +24,7 @@ public class ConexionDB {
 			//Constructor (le pasamos los datos)
 			public boolean ConexionDB (){
 				host="localhost";
-				bbdd="bbddmathdice";
+				bbdd="bbddmathdice";//nombre de la BBDD en MySQL//
 				user="root";
 				pass="pass";
 				url="jdbc:mysql://"+this.host+"/"+this.bbdd;
