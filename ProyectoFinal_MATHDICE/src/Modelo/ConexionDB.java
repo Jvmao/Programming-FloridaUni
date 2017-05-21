@@ -26,7 +26,7 @@ public class ConexionDB {
 				host="localhost";
 				bbdd="bbddmathdice";
 				user="root";
-				pass="Naizuore1x";
+				pass="pass";
 				url="jdbc:mysql://"+this.host+"/"+this.bbdd;
 				
 				//Conexión
